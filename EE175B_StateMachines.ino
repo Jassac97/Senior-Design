@@ -54,6 +54,7 @@ void RobotFSM(void) {
 
 
 void setup() {
+  Serial.begin(9600);
   //pinMode servo 1
   //pinMode servo 2
   //pinMode servo 3
