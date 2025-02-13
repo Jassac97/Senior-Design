@@ -145,34 +145,3 @@ def get_image_from_four_points(image, pts):
 
     return warped
 
-def split_board(img):
-    """
-    Given a board image, returns an array of 64 smaller images.
-    """
-    arr = []
-    sq_len = img.shape[0] // 8
-    for i in range(8):
-        for j in range(8):
-            arr.append(img[i * sq_len : (i + 1) * sq_len, j * sq_len : (j + 1) * sq_len])
-    return arr
-
-def remove_points_every_11(points):
-    sorted_points = sorted(points, key=lambda p: (p[1], p[0]))
-    result = []
-    # Iterate over the list in chunks of 11
-    for i in range(0, len(sorted_points), 11):
-        chunk = sorted_points[i:i + 11]
-        # Remove the 0th point and 10th point (if they exist)
-        filtered_chunk = [pt for j, pt in enumerate(chunk) if j != 0 and j != 10]
-        result.extend(filtered_chunk)
-    return result
-
-def is_next_position_occupied(board,move):
-    # Check the next location
-    next_column_index = ord(move[2]) - ord('a') + 1
-    next_row_index = int(move[3])
-    print(np.flip(board)[next_row_index-1,next_column_index-1])
-    if (np.flip(board)[next_row_index-1,next_column_index-1] != None):
-        return True
-    else:
-        return False
