@@ -1,13 +1,23 @@
 //State Machines for Senior Design Chess Robot
+
+#include<Servo.h>
+
+Servo baseServo; //base servo
+Servo elbowServo; //elbow servo
+Servo shoulderServo; //shoulder servo
+Servo wristServo; //wrist servo
+Servo clawServo; //claw servo
+
 enum STATE {S1, S2, S3} gState;
 //S1 is state where player is making move. Robot is waiting to receive move
 //S2 Chess engine decides move for robot. Sends signal to robot
-//S3 is when robot makes move. It then resets back to original position. 
+//S3 is when robot makes move. It then resets back to original position.
+int B = 0; //button value 
 
 void RobotFSM(void) {
 
   //transitions
-  switch(gstate) {
+  switch(gState) {
     case S1: 
 
     break;
@@ -55,18 +65,17 @@ void RobotFSM(void) {
 
 void setup() {
   Serial.begin(9600);
-  //pinMode servo 1
-  //pinMode servo 2
-  //pinMode servo 3
-  //pinMode servo 4
-  //pinMode servo 5
-  //pinMode button
-  //
+  baseServo.attach(8);
+  elbowServo.attach(9);
+  shoulderServo.attach(10);
+  wristServo.attach(11);
+  clawServo.attach(12);
+  pinMode(2, INPUT); //button
 
 }
 
 void loop() {
+  B = digitalRead(2);
   RobotFSM();
   delay(100);
-
 }
