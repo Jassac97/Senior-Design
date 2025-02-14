@@ -25,7 +25,7 @@ void RobotFSM(void) {
   //transitions
   switch(gState) {
     case S1: 
-    if (buttonState == HIGH) {
+    if (buttonState == HIGH) { //If button is pressed
       gState = S2;
     }
     else{
@@ -39,7 +39,7 @@ void RobotFSM(void) {
 
     break;
 
-    case S3
+    case S3:
 
 
     break;
@@ -56,7 +56,6 @@ void RobotFSM(void) {
     //player makes move
     //robot waits for move in initial position
     //player hits button after move is complete to send signal to chess engine
-
     break;
 
     case S2:
@@ -64,7 +63,6 @@ void RobotFSM(void) {
     digitalWrite(RedLEDPin, LOW); //Red LED Off
     //chess engine recieves player's move data
     //engine decides what move the robot should make and sends the information to robot
-
     break;
 
     case S3:
@@ -83,15 +81,14 @@ void RobotFSM(void) {
 
 void setup() {
   Serial.begin(9600);
-  baseServo.attach(8);
-  elbowServo.attach(9);
-  shoulderServo.attach(10);
-  wristServo.attach(11);
-  clawServo.attach(12);
+  baseServo.attach(8); //base servo pin 8
+  elbowServo.attach(9); //elbow servo pin 9
+  shoulderServo.attach(10); //shoulder servo pin 10
+  wristServo.attach(11); //wrist servo pin 11
+  clawServo.attach(12); //claw servo pin 12
   pinMode(buttonPin, INPUT); //button
   pinMode(GreenLEDPin, OUTPUT); //Green LED
   pinMode(RedLEDPin, OUTPUT); //Red LED
-
 }
 
 void loop() {
