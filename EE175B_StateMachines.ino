@@ -10,6 +10,7 @@ float angles[MAX_ROWS][MAX_COLS];  // 2D array to store parsed angles
 
 int parseAngles(char* input, float angles[MAX_ROWS][MAX_COLS]) {
     // Process data received from the chess engine. 
+    // Example: 30,45,60,0;90,120,150,0 -> 2D float array = {{30,45,60,0},{90,120,150,0}}
     char* arr[MAX_COLS];
     int numList = 0;
     char* list = strtok(input, " ; ");
