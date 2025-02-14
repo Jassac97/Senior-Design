@@ -2,6 +2,45 @@
 
 #include<Servo.h>
 
+
+#define MAX_ROWS 10   
+#define MAX_COLS 4 // number of angles per list sent from Python
+
+float angles[MAX_ROWS][MAX_COLS];  // 2D array to store parsed angles
+
+int parseAngles(char* input, float angles[MAX_ROWS][MAX_COLS]) {
+    // Process data received from the chess engine. 
+    char* arr[MAX_COLS];
+    int numList = 0;
+    char* list = strtok(input, " ; ");
+    arr[numList] = new char[strlen(list) + 1];
+    strcpy(arr[numList], list);
+    while (list != NULL) {
+      numList += 1;
+      list = strtok(NULL, " ; ");
+       if (list != NULL) {  // Prevents NULL issue
+         arr[numList] = new char[strlen(list) + 1];  
+         strcpy(arr[numList], list);  
+      }
+    }
+    
+    int rowIdx;   
+    for (int j = 0; j < numList; j++){;
+      rowIdx = j;
+      char* col = strtok(arr[j], ",");
+      int columnIdx = 0;
+      angles[rowIdx][columnIdx] = atoi(col);
+      while (col != NULL) {
+        columnIdx++;
+        col = strtok(NULL, ",");
+        if (col != NULL) { // Prevents NULL issue
+          angles[rowIdx][columnIdx] = atoi(col);
+        }
+      } 
+    }
+    return numList;
+}
+
 Servo baseServo; //base servo
 Servo elbowServo; //elbow servo
 Servo shoulderServo; //shoulder servo
